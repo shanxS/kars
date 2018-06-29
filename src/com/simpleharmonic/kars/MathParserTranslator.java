@@ -14,8 +14,8 @@ public class MathParserTranslator {
 
     public void expression() {
         term();
-        while(cradle.getLook().equals('+') || cradle.getLook().equals('-')) {
-            cradle.emitLn("MOVE D0, D1");
+        while(cradle.getLook() != null && (cradle.getLook().equals('+') || cradle.getLook().equals('-'))) {
+            cradle.emitLn("MOVE D0, -(SP)");
             switch (cradle.getLook()) {
                 case '-':
                     subtract();
@@ -32,13 +32,13 @@ public class MathParserTranslator {
     public void add() {
         cradle.match('+');
         term();
-        cradle.emitLn("Add D1, D0");
+        cradle.emitLn("Add (SP)+, D0");
     }
 
     public void subtract() {
         cradle.match('-');
         term();
-        cradle.emitLn("Sub D1, D0");
+        cradle.emitLn("Sub (SP)+, D0");
     }
 
 }
