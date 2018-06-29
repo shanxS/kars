@@ -16,22 +16,27 @@ public class Cradle {
     private int currentInputPos = INVALID;
     private String currentLine = null;
     @Getter private Character look;
+    private boolean readOnce = false;
 
     public void getChar() {
 
-        if (currentInputPos == INVALID) {
+        if (!readOnce) {
             Scanner s = new Scanner(System.in);
             while (!s.hasNext());
             currentLine = s.next();
             currentInputPos = BEGIN;
+            readOnce = true;
         }
 
-        look = currentLine.charAt(currentInputPos);
-        log.info("Read " + look + " currentPos " + currentInputPos);
+        if (currentInputPos != INVALID) {
+            look = currentLine.charAt(currentInputPos);
 
-        ++currentInputPos;
-        if (currentInputPos >= currentLine.length()) {
-            currentInputPos = INVALID;
+            ++currentInputPos;
+            if (currentInputPos >= currentLine.length()) {
+                currentInputPos = INVALID;
+            }
+        } else {
+            look = null;
         }
     }
 

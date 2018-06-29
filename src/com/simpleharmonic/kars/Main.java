@@ -5,7 +5,6 @@ public class Main {
     private final MathParserTranslator mpt;
 
     Main() {
-        System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
         cradle = new Cradle();
         mpt = new MathParserTranslator(cradle);
         init();

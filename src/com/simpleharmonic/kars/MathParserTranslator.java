@@ -31,7 +31,7 @@ public class MathParserTranslator {
     }
 
     public void subtract() {
-        cradle.match('+');
+        cradle.match('-');
         term();
         cradle.emitLn("Sub D1, D0");
     }
