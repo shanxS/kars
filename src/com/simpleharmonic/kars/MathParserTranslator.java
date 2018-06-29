@@ -14,13 +14,18 @@ public class MathParserTranslator {
 
     public void expression() {
         term();
-        cradle.emitLn("MOVE D0, D1");
-        switch (cradle.getLook()) {
-            case '-': subtract();
+        while(cradle.getLook().equals('+') || cradle.getLook().equals('-')) {
+            cradle.emitLn("MOVE D0, D1");
+            switch (cradle.getLook()) {
+                case '-':
+                    subtract();
                     break;
-            case '+': add();
+                case '+':
+                    add();
                     break;
-            default: cradle.expected("Addop");
+                default:
+                    cradle.expected("Addop");
+            }
         }
     }
 
